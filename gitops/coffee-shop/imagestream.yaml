@@ -1,0 +1,16 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  labels:
+    app: coffee-shop
+    app.kubernetes.io/component: coffee-shop
+    app.kubernetes.io/instance: coffee-shop
+    app.kubernetes.io/part-of: coffee-shop
+    app.openshift.io/runtime: quarkus
+  name: coffee-shop
+  namespace: coffee-shop-dev
+spec:
+  lookupPolicy:
+    local: false

@@ -1,0 +1,22 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    openshift.io/host.generated: "true"
+  labels:
+    app: coffee-shop
+    app.kubernetes.io/component: coffee-shop
+    app.kubernetes.io/instance: coffee-shop
+    app.kubernetes.io/part-of: coffee-shop
+    app.openshift.io/runtime: quarkus
+  name: coffee-shop
+  namespace: coffee-shop-dev
+spec:
+  host: coffee-shop-coffee-shop-dev.mycluster-fra02-m-527935-0046ea7a9fcbdc3ccdfd22f8fe2ae2cb-0000.eu-de.containers.appdomain.cloud
+  port:
+    targetPort: 8080-tcp
+  to:
+    kind: Service
+    name: coffee-shop
+    weight: 100
+  wildcardPolicy: None

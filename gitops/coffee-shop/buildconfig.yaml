@@ -1,0 +1,45 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  labels:
+    app: coffee-shop
+    app.kubernetes.io/component: coffee-shop
+    app.kubernetes.io/instance: coffee-shop
+    app.kubernetes.io/part-of: coffee-shop
+    app.openshift.io/runtime: quarkus
+  name: coffee-shop
+  namespace: coffee-shop-dev
+spec:
+  failedBuildsHistoryLimit: 5
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: coffee-shop:latest
+  runPolicy: Serial
+  source:
+    contextDir: coffee-shop
+    git:
+      uri: https://github.com/avishayx/coffe-shop-app.git
+    type: Git
+  strategy:
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        name: ubi8-openjdk-11:1.3
+        namespace: openshift
+    type: Source
+  successfulBuildsHistoryLimit: 5
+  triggers:
+  - github:
+      secret: EXqLWrbD1Fnr_53kAh6I
+    type: GitHub
+  - generic:
+      secret: GPqCL9ClufLxbwTMNph6
+    type: Generic
+  - type: ConfigChange
+  - imageChange:
+      lastTriggeredImageID: image-registry.openshift-image-registry.svc:5000/openshift/ubi8-openjdk-11@sha256:35ec521ad791a05985c2b8d8add94256eae540c17e398b0174c559052359d93b
+    type: ImageChange
